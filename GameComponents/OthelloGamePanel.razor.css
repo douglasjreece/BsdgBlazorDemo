@@ -1,0 +1,61 @@
+﻿.waiting {
+    border: 2px dashed red;
+    padding: 1em;
+    margin: 1em 0;
+    background-image: url('background.png');
+    max-width:50%;
+    margin:auto;
+}
+
+.field {
+    padding:2vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 52vh;
+    background-color: lightgray;
+    border-radius:2vh;
+}
+
+.board {
+    background-color: green;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.square {
+    width: 6vh;
+    height: 6vh;
+    min-width: 6vh;
+    min-height: 6vh;
+    max-width: 6vh;
+    max-height: 6vh;
+    border: 1px;
+    border-style: dashed;
+}
+
+td:hover {
+    background-color: lime;
+}
+
+td {
+    text-align: center;
+}
+
+.disc {
+    width: 5vh;
+    height: 5vh;
+}
+
+.potential-disc {
+    width: 5vh;
+    height: 5vh;
+    opacity: 0.3;
+}
+
+button {
+    border-radius: 5px;
+}
+
+.hidden {
+    visibility: hidden;
+}

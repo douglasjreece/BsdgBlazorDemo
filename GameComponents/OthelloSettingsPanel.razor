@@ -1,0 +1,120 @@
+﻿<div style="text-align:center">
+    <div class="SettingsPanel">
+        <div class="row">
+            <div class="full">
+                <h4>Settings</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="full">Player</div>
+        </div>
+
+        <div class="row">
+            <div class="column">Black</div>
+            <div class="column">White</div>
+        </div>
+
+        <div class="row">
+            <div class="column">
+                <button type="button" class="@SelectedPlayerTypeClass(PlayerColor.Black, OthelloSettings.PlayerType.Local)" @onclick="() => SetPlayerType(PlayerColor.Black, OthelloSettings.PlayerType.Local)">Local</button>
+            </div>
+            <div class="column">
+                <button type="button" class="@SelectedPlayerTypeClass(PlayerColor.White, OthelloSettings.PlayerType.Local)" @onclick="() => SetPlayerType(PlayerColor.White, OthelloSettings.PlayerType.Local)">Local</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column">
+                <button type="button" class="@SelectedPlayerTypeClass(PlayerColor.Black, OthelloSettings.PlayerType.Cpu)" @onclick="() => SetPlayerType(PlayerColor.Black, OthelloSettings.PlayerType.Cpu)">CPU</button>
+            </div>
+            <div class="column">
+                <button type="button" class="@SelectedPlayerTypeClass(PlayerColor.White, OthelloSettings.PlayerType.Cpu)" @onclick="() => SetPlayerType(PlayerColor.White, OthelloSettings.PlayerType.Cpu)">CPU</button>
+            </div>
+        </div>
+
+        <div class="row @CpuLevelClass">
+            <div class="column">
+                <button type="button" class="@SelectedCpuLevelClass(PlayerColor.Black, 0)" @onclick="() => SetCpuLevel(PlayerColor.Black, 0)">0</button>
+                <button type="button" class="@SelectedCpuLevelClass(PlayerColor.Black, 1)" @onclick="() => SetCpuLevel(PlayerColor.Black, 1)">1</button>
+                <button type="button" class="@SelectedCpuLevelClass(PlayerColor.Black, 2)" @onclick="() => SetCpuLevel(PlayerColor.Black, 2)">2</button>
+                <button type="button" class="@SelectedCpuLevelClass(PlayerColor.Black, 3)" @onclick="() => SetCpuLevel(PlayerColor.Black, 3)">3</button>
+            </div>
+            <div class="column">
+                <button type="button" class="@SelectedCpuLevelClass(PlayerColor.White, 0)" @onclick="() => SetCpuLevel(PlayerColor.White, 0)">0</button>
+                <button type="button" class="@SelectedCpuLevelClass(PlayerColor.White, 1)" @onclick="() => SetCpuLevel(PlayerColor.White, 1)">1</button>
+                <button type="button" class="@SelectedCpuLevelClass(PlayerColor.White, 2)" @onclick="() => SetCpuLevel(PlayerColor.White, 2)">2</button>
+                <button type="button" class="@SelectedCpuLevelClass(PlayerColor.White, 3)" @onclick="() => SetCpuLevel(PlayerColor.White, 3)">3</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column">
+                <button type="button" class="@SelectedPlayerTypeClass(PlayerColor.Black, OthelloSettings.PlayerType.RemoteHost)" @onclick="() => SetPlayerType(PlayerColor.Black, OthelloSettings.PlayerType.RemoteHost)">Host</button>
+            </div>
+            <div class="column">
+                <button type="button" class="@SelectedPlayerTypeClass(PlayerColor.White, OthelloSettings.PlayerType.RemoteHost)" @onclick="() => SetPlayerType(PlayerColor.White, OthelloSettings.PlayerType.RemoteHost)">Host</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column">
+                    <button type="button" class="@SelectedPlayerTypeClass(PlayerColor.Black, OthelloSettings.PlayerType.RemoteGuest)" @onclick="() => SetPlayerType(PlayerColor.Black, OthelloSettings.PlayerType.RemoteGuest)">Guest</button>
+            </div>
+            <div class="column">
+                    <button type="button" class="@SelectedPlayerTypeClass(PlayerColor.White, OthelloSettings.PlayerType.RemoteGuest)" @onclick="() => SetPlayerType(PlayerColor.White, OthelloSettings.PlayerType.RemoteGuest)">Guest</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="full @GameIdClass">
+                <div>Game ID</div>
+                <input type="text" name="gameId" maxlength="4" size="4" value="@GameIdValue" @onchange="GameIdChange" />
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@code {
+    string SelectedPlayerTypeClass(PlayerColor color, OthelloSettings.PlayerType type)
+    {
+        return SelectedButtonClass(
+            color switch
+            {
+                PlayerColor.Black => Settings.BlackPlayerType == type,
+                PlayerColor.White => Settings.WhitePlayerType == type,
+                _ => throw new NotImplementedException()
+            });
+    }
+
+    string SelectedCpuLevelClass(PlayerColor color, int level)
+    {
+        return color switch
+        {
+            PlayerColor.Black => Settings.BlackCpuLevel == level,
+            PlayerColor.White => Settings.WhiteCpuLevel == level,
+            _ => throw new NotImplementedException()
+        }
+        ? "CpuLevelButton SelectedButton"
+        : "CpuLevelButton";
+    }
+
+    string SelectedButtonClass(bool selected) => selected ? "SettingsButton SelectedButton" : "SettingsButton";
+
+    string CpuLevelClass =>
+        Settings.BlackPlayerType == OthelloSettings.PlayerType.Cpu ||
+        Settings.WhitePlayerType == OthelloSettings.PlayerType.Cpu
+        ? ""
+        : "hidden";
+
+    string GameIdClass =>
+        Settings.BlackPlayerType == OthelloSettings.PlayerType.RemoteHost ||
+        Settings.BlackPlayerType == OthelloSettings.PlayerType.RemoteGuest ||
+        Settings.WhitePlayerType == OthelloSettings.PlayerType.RemoteHost ||
+        Settings.WhitePlayerType == OthelloSettings.PlayerType.RemoteGuest
+        ? ""
+        : "hidden";
+
+    string? GameIdValue => Settings.RemoteGameId;
+
+}

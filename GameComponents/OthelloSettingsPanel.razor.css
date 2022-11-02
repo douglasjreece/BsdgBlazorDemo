@@ -1,0 +1,68 @@
+﻿td {
+    padding: 2vh
+}
+
+.SettingsPanel {
+    border: medium;
+    border-style: solid;
+    border-color: darkgreen;
+    border-radius: 5vh;
+    background-color: lightgray;
+    width: 48vh;
+    max-width: 75%;
+    margin: auto
+}
+
+.SettingsButton {
+    min-width: 5vw;
+}
+
+.CpuLevelButton {
+    width: 2vw;
+    min-width: 2vw;
+    max-width: 2vw;
+}
+
+
+.SelectedButton {
+    background-color: yellow;
+}
+
+button {
+    border-radius:1vh;
+}
+
+button:hover {
+    background-color: lightyellow;
+}
+
+input[type='text'] {
+    border-radius: 1vh;
+    text-align: center;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+}
+
+.full {
+    float: left;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}

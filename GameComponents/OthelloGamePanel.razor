@@ -1,0 +1,81 @@
+﻿@if (!game.PlayersAreReady)
+{
+    <div>
+        <div class="waiting">Waiting for players for game @game.RemoteGameId...</div>
+    </div>
+}
+
+
+<div class="field @FieldClass">
+    <div>
+        <span style="margin-right:1%">Black: <b>@BlackCount</b></span><span>White: <b>@WhiteCount</b></span>
+    </div>
+    <div style="height:2em">
+        <span>@PlayerLabel: <b>@PlayerValue</b></span>
+        @if (MustPass)
+        {
+            @if (IsPlayerInteractive)
+            {
+                <button type="button" style="margin-left:1%" @onclick="Pass">Pass</button>
+            }
+            else
+            {
+                <span style="margin-left:1%"><i>Must pass.</i></span>
+            }
+        }
+    </div>
+
+    <table class="board">
+
+        @foreach (var y in rangeY) 
+        {
+            <tr>
+            @foreach (var x in rangeX)
+            {
+                var clickX = x;
+                var clickY = y;
+                <td class="square" @onclick="() => MakePlay(x, y)">
+                    @{
+                        var positionColor = game.GetPositionColor(x, y);
+                        if (positionColor is not null)
+                        {
+                            if (positionColor.IsBlack)
+                            {
+                                            <img class="disc" src="_content/GameComponents/black-disc.svg" />
+                            }
+                            else
+                            {
+                                            <img class="disc" src="_content/GameComponents/white-disc.svg" />
+                            }
+                        } else
+                        if (IsPlayerInteractive)
+                        {
+                            var potentialPlayColor = game.GetPotentialPlayColor(x, y);
+                            if (potentialPlayColor is not null)
+                            {
+                                if (potentialPlayColor.IsBlack)
+                                {
+                                    <img class="potential-disc" src="_content/GameComponents/black-disc.svg" />
+                                }
+                                else
+                                {
+                                    <img class="potential-disc" src="_content/GameComponents/white-disc.svg" />
+                                }
+                            }
+                        }
+                    }
+                </td>
+            }
+            </tr>
+        }
+    </table>
+
+    <div class="@NewGameClass" style="text-align:center; margin-top:2%">
+        <button type="button" @onclick="NewGame">New Game</button>
+    </div>
+</div>
+
+@code {
+    string FieldClass => game?.PlayersAreReady ?? false ? "" : "hidden";
+    string NewGameClass => CanResetGame ? "" : "hidden";
+}
