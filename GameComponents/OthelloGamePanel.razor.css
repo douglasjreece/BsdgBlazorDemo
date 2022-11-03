@@ -8,10 +8,10 @@
 }
 
 .field {
-    padding:2vh;
+    padding:2vw;
     margin-left: auto;
     margin-right: auto;
-    width: 52vh;
+    width: 81vh;
     background-color: lightgray;
     border-radius:2vh;
 }
@@ -23,15 +23,16 @@
 }
 
 .square {
-    width: 6vh;
-    height: 6vh;
-    min-width: 6vh;
-    min-height: 6vh;
-    max-width: 6vh;
-    max-height: 6vh;
+    width: 9vh;
+    height: 9vh;
+    min-width: 9vh;
+    min-height: 9vh;
+    max-width: 9vh;
+    max-height: 9vh;
     border: 1px;
     border-style: dashed;
 }
+
 
 td:hover {
     background-color: lime;
@@ -42,14 +43,55 @@ td {
 }
 
 .disc {
-    width: 5vh;
-    height: 5vh;
+    width: 8vh;
+    height: 8vh;
+    min-width: 8vh;
+    min-height: 8vh;
+    max-width: 8vh;
+    max-height: 8vh;
 }
 
 .potential-disc {
-    width: 5vh;
-    height: 5vh;
+    width: 8vh;
+    height: 8vh;
+    min-width: 8vh;
+    min-height: 8vh;
+    max-width: 8vh;
+    max-height: 8vh;
     opacity: 0.3;
+}
+
+@media (max-aspect-ratio: 1/1) {
+    .field {
+        width: 72vw;
+    }
+
+    .square {
+        width: 8vw;
+        height: 8vw;
+        min-width: 8vw;
+        min-height: 8vw;
+        max-width: 8vw;
+        max-height: 8vw;
+    }
+
+    .disc {
+        width: 6vw;
+        height: 6vw;
+        min-width: 6vw;
+        min-height: 6vw;
+        max-width: 6vw;
+        max-height: 6vw;
+    }
+
+    .potential-disc {
+        width: 6vw;
+        height: 6vw;
+        min-width: 6vw;
+        min-height: 6vw;
+        max-width: 6vw;
+        max-height: 6vw;
+    }
 }
 
 button {
